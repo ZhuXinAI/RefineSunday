@@ -33,8 +33,8 @@ export interface IGridItem {
   type: string;
   label: string;
   component: React.FunctionComponent<any>;
-  propsFields: IGridItemPropField[];
-  icon: React.ReactNode;
+  propsFields?: IGridItemPropField[];
+  icon?: React.ReactNode;
   editType?: "jsonschema" | "fields";
   schema?: any;
   uiSchema?: any;

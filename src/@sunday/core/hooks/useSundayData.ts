@@ -9,8 +9,11 @@ export const useSundayData = () => {
   });
 
   const { mutateAsync } = useMutation({
-    mutationFn: (newData) => {
-      return axios.post("/api/sunday", newData);
+    mutationFn: (newData: any) => {
+      return axios.post("/api/sunday", {
+        ...data,
+        ...newData
+      });
     },
   });
 

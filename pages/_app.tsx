@@ -18,11 +18,16 @@ import { ChakraUIInferencer } from "@pankod/refine-inferencer/chakra-ui";
 import { SundayProvider } from "@sunday/core/components/SundayProvider";
 import 'react-virtualized/styles.css';
 import 'react-grid-layout/css/styles.css';
+import { SundayComponent } from "@sunday/core/components/Component";
+import { registerComponent } from "@sunday/core/utils/register";
+import { Custom } from "@components/custom";
 
 const API_URL = "https://api.fake-rest.refine.dev";
 
 // const client = new GraphQLClient(API_URL);
 // const gqlDataProvider = dataProvider(client);
+
+registerComponent(Custom);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -48,7 +53,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
               create: ChakraUIInferencer,
               edit: ChakraUIInferencer,
             },
-            { name: "help", list: () => null }
+            { name: "help", list: () => null },
+            { name: "stat", list: () => <SundayComponent id="stat"/> }
           ]}
         >
           <Component {...pageProps} />

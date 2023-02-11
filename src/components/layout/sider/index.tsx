@@ -37,6 +37,7 @@ import {
 } from "@tabler/icons";
 
 import { Title as DefaultTitle } from "../title";
+import { registerComponent } from "@sunday/core/utils/register";
 
 const defaultNavIcon = <IconList size={20} />;
 

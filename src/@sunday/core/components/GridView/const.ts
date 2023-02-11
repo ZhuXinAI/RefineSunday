@@ -35,3 +35,7 @@ export const TOOLBAR_MAP: {
   }),
   {}
 );
+
+if (typeof window !=='undefined') {
+  (window as any).TOOLBAR = TOOLBAR;
+}
