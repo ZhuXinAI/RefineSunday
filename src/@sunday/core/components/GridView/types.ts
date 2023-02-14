@@ -38,6 +38,7 @@ export interface IGridItem {
   editType?: "jsonschema" | "fields";
   schema?: any;
   uiSchema?: any;
+  layoutExtra?: any;
 }
 
 // <Grid.component label={xxx}  />

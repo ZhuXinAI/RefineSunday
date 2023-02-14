@@ -8,6 +8,7 @@ import {
   ReadyPage,
   ErrorComponent,
   AuthPage,
+  Box,
 } from "@pankod/refine-chakra-ui";
 import routerProvider from "@pankod/refine-nextjs-router";
 // import dataProvider, { GraphQLClient } from "@pankod/refine-graphql";
@@ -54,7 +55,9 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
               edit: ChakraUIInferencer,
             },
             { name: "help", list: () => null },
-            { name: "stat", list: () => <SundayComponent id="stat"/> }
+            { name: "stat", list: () => <Box flex={1} minH={0}>
+              <SundayComponent id="stat"/>
+            </Box> }
           ]}
         >
           <Component {...pageProps} />

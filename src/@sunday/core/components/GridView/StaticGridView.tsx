@@ -1,10 +1,12 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import React, { useMemo } from "react";
-import ReactGridLayout from "react-grid-layout";
+import ReactGridLayout, { Responsive, WidthProvider } from "react-grid-layout";
 import { AutoSizer } from "react-virtualized";
 import { GridViewContext } from "./context";
 import { GridItem } from "./GridItem";
 import { IGridViewData } from "./types";
+
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 type Props = {
   data: IGridViewData;
@@ -50,21 +52,20 @@ export const StaticGridView = ({ data, onEdit }: Props) => {
         )}
         <Box flex={1} minH="0">
           <Box className="SundayGridView" h="full" w="full">
-            <AutoSizer>
-              {({ width, height }) => (
-                <ReactGridLayout
+
+                <ResponsiveReactGridLayout
                   compactType={null}
-                  layout={layout}
+                  layouts={{
+                    lg: layout
+                  }}
                   rowHeight={100}
-                  width={width}
                   isDroppable={false}
                   isDraggable={false}
                   isResizable={false}
                 >
                   {actualLayout}
-                </ReactGridLayout>
-              )}
-            </AutoSizer>
+                </ResponsiveReactGridLayout>
+
           </Box>
         </Box>
       </Flex>

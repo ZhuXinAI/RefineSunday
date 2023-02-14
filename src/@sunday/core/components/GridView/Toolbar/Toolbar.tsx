@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Input, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Center, Flex, Input, Text } from "@chakra-ui/react";
 import React, { useMemo, useState } from "react";
 import { TOOLBAR } from "../const";
 
@@ -45,7 +45,7 @@ export const Toolbar = ({ onCancel, onSave }: Props) => {
             unselectable="on"
             onDragStart={(e) => e.dataTransfer.setData("text/plain", item.type)}
           >
-            {item.icon}
+            {item.icon || <Avatar name={item.label} size={'xs'}/>}
             <Text marginTop={"5px"} fontSize={12}>
               {item.label}
             </Text>

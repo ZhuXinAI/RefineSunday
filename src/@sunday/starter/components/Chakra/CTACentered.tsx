@@ -59,38 +59,41 @@ const Component = ({
 export const ChakraCTACentered: IGridItem = {
     type: "chakra_cta_centered",
     label: "CTA 居中",
-    propsFields: [
-      {
-        key: "title",
-        label: "标题",
-        type: "text",
-      },
-      {
-        key: "subtitle",
-        label: "副标题",
-        type: "text",
-      },
-      {
-        key: "leftCtaButton",
-        label: "左按钮文字",
-        type: "text",
-      },
-      {
-        key: "leftCtaButtonHref",
-        label: "左按钮链接",
-        type: "text",
-      },
-      {
-        key: "rightCtaButton",
-        label: "右按钮文字",
-        type: "text",
-      },
-      {
-        key: "rightCtaButtonHref",
-        label: "右按钮链接",
-        type: "text",
-      },
-    ],
+    layoutExtra: {
+      minW: 12,
+      minH: 3,
+      w: 12,
+      h: 3
+    },
+    schema: {
+      type: "object",
+      properties: {
+        title: {
+          type: "string",
+          title: "标题",
+        },
+        subtitle: {
+          type: "string",
+          title: "副标题",
+        },
+        leftCtaButton: {
+          type: "string",
+          title: "左按钮文字",
+        },
+        leftCtaButtonHref: {
+          type: "string",
+          title: "左按钮链接"
+        },
+        rightCtaButton: {
+          type: "string",
+          title: "右按钮文字"
+        },
+        rightCtaButtonHref: {
+          type: "string",
+          title: "右按钮链接"
+        }
+      }
+    },
     component: Component,
     icon: <ChakraIcon />,
   };

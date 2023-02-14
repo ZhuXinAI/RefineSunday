@@ -9,7 +9,6 @@ export const registerComponent = (
   inputConfig?: ISundayConfig
 ) => {
   const config = inputConfig || component.config;
-
   const item = {
     component,
     type: component.name,
@@ -20,8 +19,9 @@ export const registerComponent = (
       properties: config?.schema || {},
     },
   };
-  console.log("config item", item);
+  if (!!TOOLBAR_MAP[item.type]) {
+    return;
+  }
   TOOLBAR.push(item);
   TOOLBAR_MAP[item.type] = item;
-  console.log("Updated Toolbar", TOOLBAR);
 };

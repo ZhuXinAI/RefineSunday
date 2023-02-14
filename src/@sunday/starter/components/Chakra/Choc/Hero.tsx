@@ -98,6 +98,7 @@ const ChocHero = ({
     <SimpleGrid
       columns={{ base: 1, md: 2 }}
       spacing={0}
+      height='100%'
       _after={{
         bg: "brand.500",
         opacity: 0.25,
@@ -130,6 +131,12 @@ export const ChakraChocHero: IGridItem = {
   label: "Hero/Image",
   propsFields: [],
   component: ChocHero,
+  layoutExtra: {
+    minW: 12,
+    minH: 3,
+    w: 12,
+    h: 3
+  },
   icon: <ChakraIcon />,
   editType: "jsonschema",
   schema: {

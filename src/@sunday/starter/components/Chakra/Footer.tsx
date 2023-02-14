@@ -60,6 +60,12 @@ export const ChakraFooter: IGridItem = {
   label: "CTA Footer",
   editType: "jsonschema",
   propsFields: [],
+  layoutExtra: {
+    minW: 12,
+    minH: 2,
+    w: 12,
+    h: 2
+  },
   schema: {
     type: "object",
     properties: {

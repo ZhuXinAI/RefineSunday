@@ -11,7 +11,11 @@ import {
 import cuid from "cuid";
 // import _ from "lodash";
 import React, { useCallback, useMemo, useState } from "react";
-import ReactGridLayout, { Layout, Responsive, WidthProvider } from "react-grid-layout";
+import ReactGridLayout, {
+  Layout,
+  Responsive,
+  WidthProvider,
+} from "react-grid-layout";
 import { IoClose, IoPencil } from "react-icons/io5";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { AutoSizer } from "react-virtualized";
@@ -21,6 +25,7 @@ import { DetailBar } from "./DetailBar";
 import { GridItem } from "./GridItem";
 import { Toolbar } from "./Toolbar";
 import { IGridViewData, IGridViewItem } from "./types";
+import { TOOLBAR_MAP } from "./const";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -133,26 +138,44 @@ export const GridView = ({ data, onChange, onExit }: Props) => {
         borderRadius="10px"
         key={item.i}
         border="1px solid"
+        _hover={{
+          borderColor: "red.400",
+        }}
         borderColor={editingGrid?.key === item.i ? "red.400" : "transparent"}
       >
         <Flex
-          gap="10px"
-          flexDir={"row"}
           position={"absolute"}
-          right="10px"
-          top="10px"
-          color="gray.100"
-          zIndex={100}
+          bg="rgba(0, 0, 0, 0.3)"
+          opacity={0}
+          left={0}
+          right={0}
+          top={0}
+          bottom={0}
+          _hover={{
+            opacity: 1,
+          }}
+          justifyContent={"center"}
+          alignItems="center"
         >
-          {!item.static && (
-            <FiLock cursor={"pointer"} onClick={lockItem(item.i)} />
-          )}
-          {item.static && (
-            <FiUnlock cursor={"pointer"} onClick={unlockItem(item.i)} />
-          )}
-          <IoPencil cursor={"pointer"} onClick={editItem(item.i)} />
-          <IoClose cursor={"pointer"} onClick={removeItem(item.i)} />
+          <Flex
+            gap="10px"
+            flexDir={"row"}
+            color="gray.100"
+            justifyContent={"center"}
+            alignItems="center"
+            zIndex={100}
+          >
+            {!item.static && (
+              <FiLock size={30} cursor={"pointer"} onClick={lockItem(item.i)} />
+            )}
+            {item.static && (
+              <FiUnlock size={30} cursor={"pointer"} onClick={unlockItem(item.i)} />
+            )}
+            <IoPencil size={30} cursor={"pointer"} onClick={editItem(item.i)} />
+            <IoClose size={30} cursor={"pointer"} onClick={removeItem(item.i)} />
+          </Flex>
         </Flex>
+
         {grids[item.i] && <GridItem id={item.i} grid={grids[item.i]} />}
       </Box>
     ));
@@ -161,10 +184,16 @@ export const GridView = ({ data, onChange, onExit }: Props) => {
   const onDrop = useCallback(
     (layouts: Layout[], layoutItem, _event) => {
       const newId = cuid();
+      const type = _event.dataTransfer?.getData("text/plain");
       setLayouts(
         layouts.map((layout) => {
           if (layout.i === "__dropping-elem__") {
             layout.i = newId;
+            const layoutExtra = TOOLBAR_MAP[type].layoutExtra || {};
+            return {
+              ...layout,
+              ...layoutExtra,
+            };
           }
           return layout;
         })
@@ -172,7 +201,7 @@ export const GridView = ({ data, onChange, onExit }: Props) => {
       setGrids({
         ...grids,
         [newId]: {
-          type: _event.dataTransfer?.getData("text/plain"),
+          type,
           props: {},
         },
       });
@@ -209,116 +238,125 @@ export const GridView = ({ data, onChange, onExit }: Props) => {
   );
 
   return (
-    <Flex h="100%" w="100%" flexDir={"row"}>
+    <Flex position={"relative"} h="100%" w="100%" flexDir={"row"}>
       <Toolbar onSave={onSave} onCancel={onCancel} />
-      <GridViewContext.Provider
-        value={{
-          isEditMode: true,
-          grids,
-          setGrids,
-          editingGrid,
-          setEditingGrid,
-        }}
-      >
-        <Flex minW="0px" flex={1} h="full" flexDirection={"column"}>
-          <Flex paddingTop="10px" paddingX="20px">
-            <Editable
-              zIndex="10"
-              onSubmit={async (title: string) => {
-                setTitle(title);
-                // toast({
-                //   title: "Title Updated",
-                //   status: "success",
-                //   duration: 2000,
-                //   isClosable: true,
-                // });
-              }}
-              fontSize="20px"
-              defaultValue={title}
-            >
-              <EditablePreview
-                borderWidth="1px"
-                borderColor="transparent"
-                p="2"
-                _hover={{
-                  borderColor: "white",
+      <Flex w="100%" h="100%" overflowY={"auto"}>
+        <GridViewContext.Provider
+          value={{
+            isEditMode: true,
+            grids,
+            setGrids,
+            editingGrid,
+            setEditingGrid,
+          }}
+        >
+          <Flex minW="0px" flex={1} h="full" flexDirection={"column"}>
+            <Flex paddingTop="10px" paddingX="20px">
+              <Editable
+                zIndex="10"
+                onSubmit={async (title: string) => {
+                  setTitle(title);
+                  // toast({
+                  //   title: "Title Updated",
+                  //   status: "success",
+                  //   duration: 2000,
+                  //   isClosable: true,
+                  // });
                 }}
-              />
-              <EditableInput />
-            </Editable>
-            <Box flex={1}></Box>
-          </Flex>
-          <Box flex={1} minH="0">
-            <Flex
-              padding="20px"
-              flexDir={"row"}
-              w={"full"}
-              h="full"
-              position="relative"
-            >
-              <Box
-                borderRadius="20px"
-                overflow={"hidden"}
-                h={"100%"}
-                flex={1}
-                minW={0}
+                fontSize="20px"
+                defaultValue={title}
+              >
+                <EditablePreview
+                  borderWidth="1px"
+                  borderColor="transparent"
+                  p="2"
+                  _hover={{
+                    borderColor: "white",
+                  }}
+                />
+                <EditableInput />
+              </Editable>
+              <Box flex={1}></Box>
+            </Flex>
+            <Box flex={1} minH="0">
+              <Flex
+                padding="20px"
+                flexDir={"row"}
+                w={"full"}
+                h="full"
                 position="relative"
-                padding={"5px"}
               >
                 <Box
-                  w={"100%"}
-                  h={"100%"}
-                  borderStyle={"dashed"}
                   borderRadius="20px"
-                  borderWidth={"1px"}
-                  borderColor="gray.100"
-                  position={"absolute"}
-                  top="0"
-                  left="0"
-                  zIndex={0}
-                ></Box>
-
-                <Box
-                  overflowY={"scroll"}
-                  w="full"
-                  h={"full"}
-                  className="SundayGridView"
+                  overflow={"hidden"}
+                  h={"100%"}
+                  flex={1}
+                  minW={0}
+                  position="relative"
+                  padding={"5px"}
                 >
-                  {/* <AutoSizer>
+                  <Box
+                    w={"100%"}
+                    h={"100%"}
+                    borderStyle={"dashed"}
+                    borderRadius="20px"
+                    borderWidth={"1px"}
+                    borderColor="gray.100"
+                    position={"absolute"}
+                    top="0"
+                    left="0"
+                    zIndex={0}
+                  ></Box>
+
+                  <Box
+                    overflowY={"scroll"}
+                    w="full"
+                    h={"full"}
+                    className="SundayGridView"
+                  >
+                    {/* <AutoSizer>
                     {({ width, height }) => ( */}
-                      <ResponsiveReactGridLayout
-                        // key={JSON.stringify([isEditMode])}
-                        compactType={null}
-                        onDropDragOver={(e) => ({ w: 6, h: 1 })}
-                        onDrop={onDrop}
-                        layouts={{
-                          lg: layouts
-                        }}
-                        rowHeight={100}
-                        breakpoints={{ lg: 1200 }}
-                        cols={{ lg: 12 }}
-                        resizeHandles={
-                          ["e", "n", "s", "w", "ne", "nw", "se", "sw"]
-                          // isEditMode
-                          //   ? ["e", "n", "s", "w", "ne", "nw", "se", "sw"]
-                          //   : undefined
-                        }
-                        onLayoutChange={onLayoutChange}
-                        // measureBeforeMount={false}
-                        isDroppable
-                        isDraggable
-                        isResizable
-                        // useCSSTransforms
-                      >
-                        {actualLayout}
-                      </ResponsiveReactGridLayout>
+                    <ResponsiveReactGridLayout
+                      style={{
+                        paddingBottom: 200,
+                      }}
+                      // key={JSON.stringify([isEditMode])}
+                      compactType={'vertical'}
+                      onDropDragOver={(e) => {
+                        return { w: 6, h: 1 };
+                      }}
+                      onDrop={onDrop}
+                      layouts={{
+                        lg: layouts,
+                      }}
+                      rowHeight={100}
+                      breakpoints={{ lg: 1200 }}
+                      cols={{ lg: 12 }}
+                      resizeHandles={
+                        ["e", "n", "s", "w", "ne", "nw", "se", "sw"]
+                        // isEditMode
+                        //   ? ["e", "n", "s", "w", "ne", "nw", "se", "sw"]
+                        //   : undefined
+                      }
+                      onLayoutChange={onLayoutChange}
+                      // measureBeforeMount={false}
+                      isDroppable
+                      isDraggable
+                      isResizable
+                      // useCSSTransforms
+                    >
+                      {actualLayout}
+                    </ResponsiveReactGridLayout>
+                  </Box>
                 </Box>
-              </Box>
-            </Flex>
-          </Box>
-        </Flex>
-      </GridViewContext.Provider>
-      <DetailBar grid={editingGrid} onSave={onSaveEditingGrid} />
+              </Flex>
+            </Box>
+          </Flex>
+        </GridViewContext.Provider>
+      </Flex>
+      {!!editingGrid && <DetailBar onExit={() => {
+        setEditingGrid(undefined);
+      }} grid={editingGrid} onSave={onSaveEditingGrid} />}
     </Flex>
   );
 };

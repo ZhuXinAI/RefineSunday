@@ -25,7 +25,7 @@ export const Layout: React.FC<LayoutProps> = ({
         flexDirection="column"
         flex={1}
         overflow="hidden"
-        minH="100vh"
+        maxH="100vh"
       >
         <HeaderToRender />
         <Box p={[2, 4]}>{children}</Box>
