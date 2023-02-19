@@ -17,11 +17,12 @@ import { Title, Sider, Layout, Header } from "@components/layout";
 import { authProvider } from "src/authProvider";
 import { ChakraUIInferencer } from "@pankod/refine-inferencer/chakra-ui";
 import { SundayProvider } from "@sunday/core/components/SundayProvider";
-import 'react-virtualized/styles.css';
-import 'react-grid-layout/css/styles.css';
+import "react-virtualized/styles.css";
+import "react-grid-layout/css/styles.css";
 import { SundayComponent } from "@sunday/core/components/Component";
 import { registerComponent } from "@sunday/core/utils/register";
 import { Custom } from "@components/custom";
+import { Create } from "@components/Create";
 
 const API_URL = "https://api.fake-rest.refine.dev";
 
@@ -29,6 +30,7 @@ const API_URL = "https://api.fake-rest.refine.dev";
 // const gqlDataProvider = dataProvider(client);
 
 registerComponent(Custom);
+registerComponent(Create);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -55,9 +57,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
               edit: ChakraUIInferencer,
             },
             { name: "help", list: () => null },
-            { name: "stat", list: () => <Box flex={1} minH={0}>
-              <SundayComponent id="stat"/>
-            </Box> }
+            {
+              name: "stat",
+              list: () => (
+                <Box flex={1} minH={0}>
+                  <SundayComponent id="stat" />
+                </Box>
+              ),
+            },
           ]}
         >
           <Component {...pageProps} />
