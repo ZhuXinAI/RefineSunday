@@ -17,23 +17,32 @@ import { Title, Sider, Layout, Header } from "@components/layout";
 import { authProvider } from "src/authProvider";
 import { ChakraUIInferencer } from "@pankod/refine-inferencer/chakra-ui";
 import { SundayProvider } from "@sunday/core/components/SundayProvider";
-import 'react-virtualized/styles.css';
-import 'react-grid-layout/css/styles.css';
+import "react-virtualized/styles.css";
+import "react-grid-layout/css/styles.css";
 import { SundayComponent } from "@sunday/core/components/Component";
 import { registerComponent } from "@sunday/core/utils/register";
 import { Custom } from "@components/custom";
+import { Create } from "@components/Create";
+import { atom, useAtom } from 'jotai'
 
 const API_URL = "https://api.fake-rest.refine.dev";
 
 // const client = new GraphQLClient(API_URL);
 // const gqlDataProvider = dataProvider(client);
 
-registerComponent([Custom]);
+const sundayAtom = atom('sunday')
+
+registerComponent([Custom, Create]);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  const [sundayData, setSundayData] = useAtom(sundayAtom)
+
   return (
     <ChakraProvider theme={refineTheme}>
-      <SundayProvider>
+      <SundayProvider provider={{
+        value: sundayData,
+        onChange: setSundayData
+      }}>
         <Refine
           routerProvider={routerProvider}
           dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
@@ -55,9 +64,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
               edit: ChakraUIInferencer,
             },
             { name: "help", list: () => null },
-            { name: "stat", list: () => <Box flex={1} minH={0}>
-              <SundayComponent id="stat"/>
-            </Box> }
+            {
+              name: "stat",
+              list: () => (
+                <Box flex={1} minH={0}>
+                  <SundayComponent id="stat" />
+                </Box>
+              ),
+            },
           ]}
         >
           <Component {...pageProps} />
