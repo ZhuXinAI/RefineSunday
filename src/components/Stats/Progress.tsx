@@ -20,7 +20,7 @@ export const Progress: React.FC<Props> = ({ title }) => {
   });
 
   const progressValue = useMemo(() => {
-    return (data?.data?.length || 0) / (data?.total || 100)
+    return Math.round((data?.data?.length || 0) / (data?.total || 100))
   }, [data])
 
   return (
@@ -52,6 +52,12 @@ export const Progress: React.FC<Props> = ({ title }) => {
             type: 'string',
             label: "Title"
         },
+    },
+    layoutExtra: {
+      minW: 3,
+      minH: 2,
+      w: 3,
+      h: 2,
     },
     component: Progress
 }

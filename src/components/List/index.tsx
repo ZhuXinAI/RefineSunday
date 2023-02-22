@@ -13,6 +13,7 @@ import {
   Breadcrumb,
 } from "@pankod/refine-chakra-ui";
 import { useTable, ColumnDef, flexRender } from "@pankod/refine-react-table";
+import { SundayComponent } from "@sunday/core/types/sunday";
 
 interface Props {
   title: string | React.ReactNode;
@@ -92,7 +93,7 @@ export const List: React.FC<Props> = ({
   );
 };
 
-(List as any).config = {
+(List as SundayComponent).config = {
   schema: {
     title: {
       type: "string",
@@ -124,4 +125,11 @@ export const List: React.FC<Props> = ({
   },
   type: "list",
   label: "List",
+  component: List,
+  layoutExtra: {
+    minW: 12,
+    minH: 5,
+    w: 12,
+    h: 5,
+  },
 };

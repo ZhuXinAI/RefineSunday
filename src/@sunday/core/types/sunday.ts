@@ -4,5 +4,11 @@ export type SundayComponent = React.FC & {
     type: string;
     label: string;
     component: any;
+    layoutExtra?: {
+      minW: number;
+      minH: number;
+      w: number;
+      h: number;
+    }
   };
 };

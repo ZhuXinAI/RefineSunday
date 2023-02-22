@@ -56,11 +56,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
               name: "posts",
               list: SundayRefineComponent,
               show: ChakraUIInferencer,
-              create: () => (
-                <Box flex={1} minH={0}>
-                  <SundayComponent id="create" />
-                </Box>
-              ),
+              create: SundayRefineComponent,
               edit: ChakraUIInferencer,
             },
             { name: "help", list: () => null },

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export const useSundayLocalStateProvider = () => {
   const [isReady, setIsReady] = useState(false);
-  const [sundayData, setSundayData] = useState(undefined);
+  const [sundayData, setSundayData] = useState({});
 
   useEffect(() => {
     if (typeof window !== "undefined") {
