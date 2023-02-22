@@ -24,12 +24,12 @@ import {
   SundayRefineComponent,
 } from "@sunday/core/components/Component";
 import { registerComponent } from "@sunday/core/utils/register";
-import { Custom } from "@components/custom";
 import { Create } from "@components/Create";
 import { useSundayLocalStateProvider } from "@sunday/core/hooks/useSundayProvider";
 import { Progress } from "@components/Stats/Progress";
+import { List } from "@components/List";
 
-registerComponent([Custom, Create, Progress]);
+registerComponent([Create, Progress, List]);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const provider = useSundayLocalStateProvider();
@@ -56,7 +56,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
               name: "posts",
               list: SundayRefineComponent,
               show: ChakraUIInferencer,
-              create: ChakraUIInferencer,
+              create: () => (
+                <Box flex={1} minH={0}>
+                  <SundayComponent id="create" />
+                </Box>
+              ),
               edit: ChakraUIInferencer,
             },
             { name: "help", list: () => null },

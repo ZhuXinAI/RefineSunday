@@ -15,7 +15,7 @@ type Props = {
 };
 
 const Component = ({ endpoints, xLabel = "标题", yLabel = "数量" }: Props) => {
-  const { data = [], isLoading } = useMultipleCountData(endpoints, 'count');
+  const { data = [], isLoading } = useMultipleCountData(endpoints, "count");
 
   const enhancedData = useMemo(() => {
     console.log("Line data", data);
@@ -108,14 +108,13 @@ export const NIVO_LINE: IGridItem = {
   type: "nivo_line",
   label: "线状图",
   editType: "jsonschema",
-  propsFields: [],
   schema: {
-    type: "object",
+    // type: "object",
     definitions: COMMON_DEFINITION,
     properties: {
       endpoints: {
         type: "array",
-        title: "Data source",
+        title: "Data Source",
         items: {
           type: "object",
           title: "",
@@ -128,15 +127,15 @@ export const NIVO_LINE: IGridItem = {
               type: "string",
               title: "Group Name",
             },
-          }
+          },
         },
       },
       xLabel: {
-        title: "X Axis Label",
+        title: "X Axis Title",
         type: "string",
       },
       yLabel: {
-        title: "Y Axis Label",
+        title: "Y Axis Title",
         type: "string",
       },
     },

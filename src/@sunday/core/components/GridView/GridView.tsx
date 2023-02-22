@@ -154,6 +154,7 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
           bottom={0}
           _hover={{
             opacity: 1,
+            zIndex: 99,
           }}
           justifyContent={"center"}
           alignItems="center"
@@ -251,7 +252,7 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
             setEditingGrid,
           }}
         >
-          <Flex minW="0px" flex={1} h="full" flexDirection={"column"}>
+          <Flex minW="0px" flex={1} h="calc(100vh - 50px)" flexDirection={"column"}>
             <Flex paddingTop="10px" paddingX="20px">
               <Editable
                 zIndex="10"

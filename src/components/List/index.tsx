@@ -27,7 +27,7 @@ export const List: React.FC<Props> = ({
   resource,
   withBreadcrumb,
   wrapperProps,
-  columns,
+  columns = [],
 }) => {
   const {
     getHeaderGroups,
@@ -52,7 +52,7 @@ export const List: React.FC<Props> = ({
       <TableContainer>
         <Table variant="simple" whiteSpace="pre-line">
           <Thead>
-            {getHeaderGroups().map((headerGroup) => (
+            {getHeaderGroups()?.map((headerGroup) => (
               <Tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
@@ -69,7 +69,7 @@ export const List: React.FC<Props> = ({
             ))}
           </Thead>
           <Tbody>
-            {getRowModel().rows.map((row) => {
+            {getRowModel()?.rows?.map((row) => {
               return (
                 <Tr key={row.id}>
                   {row.getVisibleCells().map((cell) => {
@@ -97,6 +97,29 @@ export const List: React.FC<Props> = ({
     title: {
       type: "string",
       title: "Title",
+    },
+    withBreadcrumb: {
+      title: "With Breadcrumb",
+      type: "boolean",
+    },
+    columns: {
+      title: "Columns",
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+            default: "id",
+          },
+          header: {
+            type: "string",
+          },
+          accessorKey: {
+            type: "string",
+          },
+        },
+      },
     },
   },
   type: "list",

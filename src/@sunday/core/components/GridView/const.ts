@@ -1,9 +1,6 @@
 import { IGridItem } from "./types";
 
-
-export const TOOLBAR: IGridItem[] = [
-
-];
+export const TOOLBAR: IGridItem[] = [];
 
 export const TOOLBAR_MAP: {
   [key: string]: IGridItem;
