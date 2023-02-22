@@ -99,6 +99,10 @@ export const List: React.FC<Props> = ({
       type: "string",
       title: "Title",
     },
+    resource:{
+      type: "string",
+      title: "Resource",
+    },
     withBreadcrumb: {
       title: "With Breadcrumb",
       type: "boolean",
