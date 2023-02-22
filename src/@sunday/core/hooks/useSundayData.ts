@@ -1,25 +1,10 @@
-import axios from "axios";
-import { useMutation, useQuery } from "react-query";
+import { useSundayContext } from "./useSundayContext";
 
 export const useSundayData = () => {
-  const { data, isFetched } = useQuery("sundayData", () => {
-    return axios.get("/api/sunday").then((response) => {
-      return response.data;
-    });
-  });
-
-  const { mutateAsync } = useMutation({
-    mutationFn: (newData: any) => {
-      return axios.post("/api/sunday", {
-        ...data,
-        ...newData
-      });
-    },
-  });
-
+  const { value, onChange, isReady } = useSundayContext();
   return {
-    data,
-    isFetched,
-    updateData: mutateAsync,
+    data: value,
+    isFetched: isReady,
+    updateData: onChange,
   };
 };

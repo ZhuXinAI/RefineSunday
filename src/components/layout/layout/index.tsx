@@ -26,9 +26,10 @@ export const Layout: React.FC<LayoutProps> = ({
         flex={1}
         overflow="hidden"
         maxH="100vh"
+        h={'100vh'}
       >
         <HeaderToRender />
-        <Box p={[2, 4]}>{children}</Box>
+        <Box minH={0} flex={1} p={[2, 4]}>{children}</Box>
         {Footer && <Footer />}
       </Box>
       {OffLayoutArea && <OffLayoutArea />}

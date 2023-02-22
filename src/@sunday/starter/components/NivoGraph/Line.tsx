@@ -115,28 +115,28 @@ export const NIVO_LINE: IGridItem = {
     properties: {
       endpoints: {
         type: "array",
-        title: "数据来源组",
+        title: "Data source",
         items: {
           type: "object",
           title: "",
           properties: {
             url: {
               type: "string",
-              title: "API地址",
+              title: "API Address",
             },
             label: {
               type: "string",
-              title: "组名",
+              title: "Group Name",
             },
           }
         },
       },
       xLabel: {
-        title: "x轴标题",
+        title: "X Axis Label",
         type: "string",
       },
       yLabel: {
-        title: "y轴标题",
+        title: "Y Axis Label",
         type: "string",
       },
     },

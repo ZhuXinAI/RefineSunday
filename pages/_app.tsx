@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AppProps } from "next/app";
 import { Refine } from "@pankod/refine-core";
 import {
@@ -19,30 +19,26 @@ import { ChakraUIInferencer } from "@pankod/refine-inferencer/chakra-ui";
 import { SundayProvider } from "@sunday/core/components/SundayProvider";
 import "react-virtualized/styles.css";
 import "react-grid-layout/css/styles.css";
-import { SundayComponent } from "@sunday/core/components/Component";
+import {
+  SundayComponent,
+  SundayRefineComponent,
+} from "@sunday/core/components/Component";
 import { registerComponent } from "@sunday/core/utils/register";
 import { Custom } from "@components/custom";
 import { Create } from "@components/Create";
-import { atom, useAtom } from 'jotai'
+import { useSundayLocalStateProvider } from "@sunday/core/hooks/useSundayProvider";
+import { Progress } from "@components/Stats/Progress";
 
-const API_URL = "https://api.fake-rest.refine.dev";
-
-// const client = new GraphQLClient(API_URL);
-// const gqlDataProvider = dataProvider(client);
-
-const sundayAtom = atom('sunday')
-
-registerComponent([Custom, Create]);
+registerComponent([Custom, Create, Progress]);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  const [sundayData, setSundayData] = useAtom(sundayAtom)
+  const provider = useSundayLocalStateProvider();
 
   return (
     <ChakraProvider theme={refineTheme}>
-      <SundayProvider provider={{
-        value: sundayData,
-        onChange: setSundayData
-      }}>
+      <SundayProvider
+        provider={provider}
+      >
         <Refine
           routerProvider={routerProvider}
           dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
@@ -58,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           resources={[
             {
               name: "posts",
-              list: ChakraUIInferencer,
+              list: SundayRefineComponent,
               show: ChakraUIInferencer,
               create: ChakraUIInferencer,
               edit: ChakraUIInferencer,
@@ -66,11 +62,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             { name: "help", list: () => null },
             {
               name: "stat",
-              list: () => (
-                <Box flex={1} minH={0}>
-                  <SundayComponent id="stat" />
-                </Box>
-              ),
+              list: SundayRefineComponent,
             },
           ]}
         >

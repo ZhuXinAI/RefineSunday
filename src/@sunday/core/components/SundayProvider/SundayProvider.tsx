@@ -1,13 +1,15 @@
 import React from "react";
-import { sundayQueryClient } from "@sunday/core/utils/client";
-import { QueryClientProvider } from "react-query";
+import { SundayContext } from "@sunday/core/hooks/useSundayContext";
+
 
 export const SundayProvider: React.FunctionComponent<{
-  withTheme: boolean,
-}> = ({ children, withTheme = false }) => {
+  withTheme?: boolean,
+  provider: any,
+  children: any,
+}> = ({ children, withTheme = false, provider }) => {
   return (
-    <QueryClientProvider client={sundayQueryClient}>
+    <SundayContext.Provider value={provider}>
       {children}
-    </QueryClientProvider>
+    </SundayContext.Provider>
   );
 };

@@ -1,4 +1,3 @@
-import { COMMON_DEFINITION } from "@sunday/starter/json-schema/definitions";
 import { IGridItem } from "../components/GridView";
 import { TOOLBAR, TOOLBAR_MAP } from "../components/GridView/const";
 
@@ -23,6 +22,4 @@ export const registerComponent = (components: any[]) => {
     TOOLBAR.push(item);
     TOOLBAR_MAP[item.type] = item;
   });
-
-  console.log("TOOLBAR_AFTER", TOOLBAR, TOOLBAR_MAP);
 };

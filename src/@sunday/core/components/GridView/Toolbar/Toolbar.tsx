@@ -1,21 +1,37 @@
-import { Avatar, Box, Button, Center, Flex, Input, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Center,
+  Flex,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 import React, { useMemo, useState } from "react";
 import { TOOLBAR } from "../const";
 
 type Props = {
   onCancel: () => void;
   onSave: () => void;
+  components?: any[];
 };
 
-export const Toolbar = ({ onCancel, onSave }: Props) => {
+export const Toolbar = ({ onCancel, onSave, components }: Props) => {
   const [searchInput, setSearchInput] = useState("");
 
   const toolbarItems = useMemo(() => {
-    console.log("TOOLBAR",TOOLBAR)
-    return TOOLBAR.filter((item) =>
+    return TOOLBAR.filter((item) => {
+      if (components) {
+        return components.find(
+          (component) => component?.config?.type === item.type
+        );
+      } else {
+        return item;
+      }
+    }).filter((item) =>
       item.label?.toLowerCase()?.includes(searchInput.toLowerCase())
     );
-  }, [searchInput]);
+  }, [searchInput, components]);
 
   return (
     <Flex
@@ -28,36 +44,46 @@ export const Toolbar = ({ onCancel, onSave }: Props) => {
       h="full"
     >
       <Input
-        placeholder="搜索"
+        placeholder="Search"
         value={searchInput}
         onChange={(event) => setSearchInput(event.target.value)}
       />
-      <Flex paddingBottom={'20px'} overflowY={'auto'} flex={1} minH='0px' width={"100%"} flexDir={"row"} flexWrap="wrap">
-        {toolbarItems.map((item) => (
-          <Center
-            cursor={"pointer"}
-            marginY={"20px"}
-            flexDirection={"column"}
-            key={item.type}
-            width={"50%"}
-            h={50}
-            className="droppable-element"
-            draggable={true}
-            unselectable="on"
-            onDragStart={(e) => e.dataTransfer.setData("text/plain", item.type)}
-          >
-            {item.icon || <Avatar name={item.label} size={'xs'}/>}
-            <Text marginTop={"5px"} fontSize={12}>
-              {item.label}
-            </Text>
-          </Center>
-        ))}
+      <Flex flex={1} minH="0px" overflowY={"auto"}>
+        <Flex
+          paddingBottom={"20px"}
+          width={"100%"}
+          flexDir={"row"}
+          flexWrap="wrap"
+          h={0}
+        >
+          {toolbarItems.map((item) => (
+            <Center
+              cursor={"pointer"}
+              marginY={"20px"}
+              flexDirection={"column"}
+              key={item.type}
+              width={"50%"}
+              h={50}
+              className="droppable-element"
+              draggable={true}
+              unselectable="on"
+              onDragStart={(e) =>
+                e.dataTransfer.setData("text/plain", item.type)
+              }
+            >
+              {item.icon || <Avatar name={item.label} size={"xs"} />}
+              <Text marginTop={"5px"} fontSize={12}>
+                {item.label}
+              </Text>
+            </Center>
+          ))}
+        </Flex>
       </Flex>
       <Flex gap="10px" flexDir={"column"}>
-        <Button onClick={onSave}>保存</Button>
+        <Button onClick={onSave}>Save</Button>
 
         <Button onClick={onCancel} variant="outline">
-          取消
+          Cancel
         </Button>
       </Flex>
     </Flex>

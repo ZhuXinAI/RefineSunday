@@ -47,7 +47,7 @@ export const StaticGridView = ({ data, onEdit }: Props) => {
         {onEdit && (
           <Flex paddingTop="10px" paddingX="20px">
             <Box flex={1}></Box>
-            <Button onClick={onEdit}>编辑</Button>
+            <Button onClick={onEdit}>Edit</Button>
           </Flex>
         )}
         <Box flex={1} minH="0">

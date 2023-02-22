@@ -33,6 +33,7 @@ type Props = {
   data: IGridViewData;
   onChange: (data: IGridViewData) => void;
   onExit: () => void;
+  components?: any[];
 };
 
 function removeUnusedGrid(
@@ -55,7 +56,7 @@ function removeUnusedGrid(
   return newGrids;
 }
 
-export const GridView = ({ data, onChange, onExit }: Props) => {
+export const GridView = ({ data, onChange, onExit, components }: Props) => {
   const [title, setTitle] = useState<string>(data.title || "");
   const [layouts, setLayouts] = useState<Layout[]>(data.layouts || []);
   const [grids, setGrids] = useState<{
@@ -141,7 +142,7 @@ export const GridView = ({ data, onChange, onExit }: Props) => {
         _hover={{
           borderColor: "red.400",
         }}
-        borderColor={editingGrid?.key === item.i ? "red.400" : "transparent"}
+        borderColor={editingGrid?.key === item.i ? "red.400" :"white"}
       >
         <Flex
           position={"absolute"}
@@ -239,7 +240,7 @@ export const GridView = ({ data, onChange, onExit }: Props) => {
 
   return (
     <Flex position={"relative"} h="100%" w="100%" flexDir={"row"}>
-      <Toolbar onSave={onSave} onCancel={onCancel} />
+      <Toolbar components={components} onSave={onSave} onCancel={onCancel} />
       <Flex w="100%" h="100%" overflowY={"auto"}>
         <GridViewContext.Provider
           value={{
