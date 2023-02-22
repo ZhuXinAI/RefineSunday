@@ -1,4 +1,3 @@
-import { registerComponent } from "@sunday/core/utils/register";
 import React, { useCallback, useMemo } from "react";
 import {
   Breadcrumb,
@@ -39,7 +38,6 @@ export const Create: React.FC<Props> = ({
   const {
     refineCore: { formLoading },
     saveButtonProps,
-    register,
     formState: { errors },
   } = useForm();
   const renderTitle = useMemo(() => {
@@ -65,6 +63,7 @@ export const Create: React.FC<Props> = ({
             ))}
           </Select>
         );
+    
       default:
         return <Input id={field?.id || field?.label} type="text" {...field} />;
     }
@@ -94,6 +93,10 @@ export const Create: React.FC<Props> = ({
     title: {
       title: "Title",
       type: "string",
+    },
+    withBreadcrumb:{
+        title: "With Breadcrumb",
+        type: "boolean",
     },
     fields: {
       title: "Fields",

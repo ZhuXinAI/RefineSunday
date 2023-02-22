@@ -21,16 +21,16 @@ import "react-virtualized/styles.css";
 import "react-grid-layout/css/styles.css";
 import { SundayComponent } from "@sunday/core/components/Component";
 import { registerComponent } from "@sunday/core/utils/register";
-import { Custom } from "@components/custom";
 import { Create } from "@components/Create";
+import { List } from "@components/List";
 
 const API_URL = "https://api.fake-rest.refine.dev";
 
 // const client = new GraphQLClient(API_URL);
 // const gqlDataProvider = dataProvider(client);
 
-registerComponent(Custom);
 registerComponent(Create);
+registerComponent(List);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -53,7 +53,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
               name: "posts",
               list: ChakraUIInferencer,
               show: ChakraUIInferencer,
-              create: ChakraUIInferencer,
+              create: () => (
+                <Box flex={1} minH={0}>
+                  <SundayComponent id="create" />
+                </Box>
+              ),
               edit: ChakraUIInferencer,
             },
             { name: "help", list: () => null },

@@ -16,24 +16,16 @@ const Component = ({ dataSource }: Props) => {
 
 export const NIVO_PIE: IGridItem = {
   type: "nivo_pie",
-  label: "圆饼图",
-  propsFields: [
-    {
-      key: "dataSource",
-      label: "数据来源",
-      type: "select",
-      options: [
-        {
-          key: "space",
-          value: "数据空间",
-        },
-        {
-          key: "custom_json",
-          value: "自定义json",
-        },
-      ],
+  label: "Pie Chart",
+  schema: {
+    properties: {
+      dataSource: {
+        title: "Data Source",
+        type: "string",
+        enum: ["Data Space", "Custom JSON"],
+      },
     },
-  ],
+  },
   component: Component,
   icon: <BsPieChart size={36} />,
 };

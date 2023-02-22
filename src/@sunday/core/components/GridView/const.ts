@@ -15,15 +15,15 @@ import * as CHAKRA from "@sunday/starter/components/Chakra";
 export const TOOLBAR: IGridItem[] = [
   STATS,
   PROGRESS,
-  GRID,
-  TABLE,
-  UI_LABEL,
-  UI_INPUT,
-  UI_BUTTON,
-  FORM,
+  // GRID,
+  // TABLE,
+  // UI_LABEL,
+  // UI_INPUT,
+  // UI_BUTTON,
+  // FORM,
   
   ...Object.values(NIVO_GRAPH),
-  ...Object.values(CHAKRA),
+  // ...Object.values(CHAKRA),
 ];
 
 export const TOOLBAR_MAP: {
