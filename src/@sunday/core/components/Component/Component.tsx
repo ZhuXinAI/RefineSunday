@@ -1,7 +1,6 @@
 import useDebounce from "@sunday/core/hooks/useDebounce";
 import React, { useEffect, useState } from "react";
 import { GridView, StaticGridView } from "../GridView";
-import axios from "axios";
 import { useSundayData } from "@sunday/core/hooks/useSundayData";
 
 type Props = {

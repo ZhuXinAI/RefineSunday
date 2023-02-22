@@ -28,7 +28,7 @@ const API_URL = "https://api.fake-rest.refine.dev";
 // const client = new GraphQLClient(API_URL);
 // const gqlDataProvider = dataProvider(client);
 
-registerComponent(Custom);
+registerComponent([Custom]);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (

@@ -11,8 +11,9 @@ export const Toolbar = ({ onCancel, onSave }: Props) => {
   const [searchInput, setSearchInput] = useState("");
 
   const toolbarItems = useMemo(() => {
+    console.log("TOOLBAR",TOOLBAR)
     return TOOLBAR.filter((item) =>
-      item.label.toLowerCase().includes(searchInput.toLowerCase())
+      item.label?.toLowerCase()?.includes(searchInput.toLowerCase())
     );
   }, [searchInput]);
 

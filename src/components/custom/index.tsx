@@ -18,4 +18,5 @@ export const Custom: React.FC<Props> = ({ title }) => {
   },
   type: "custom",
   label: "Custom",
+  component: Custom
 };

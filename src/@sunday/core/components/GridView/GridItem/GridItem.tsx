@@ -13,11 +13,16 @@ type Props = {
 
 export const GridItem = ({ grid, id, isStatic = false }: Props) => {
   const element = useMemo(() => {
-    return React.createElement(TOOLBAR_MAP[grid.type]?.component, {
-      ...grid.props,
-      id,
-      isStatic
-    });
+    if (!!TOOLBAR_MAP[grid.type]?.component) {
+      return React.createElement(TOOLBAR_MAP[grid.type]?.component, {
+        ...grid.props,
+        id,
+        isStatic
+      });
+    }
+    else {
+      return null;
+    }
   }, [grid, id]);
 
   return <Box overflow={'hidden'} h="full" w="full">{element}</Box>;
