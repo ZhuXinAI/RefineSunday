@@ -48,7 +48,8 @@ export const List: React.FC<Props> = ({
         } else {
           return {
             ..._column,
-            cell: function render({ getValue }) {
+            cell: (props: any) => {
+              const { getValue } = props;
               switch (_column.fieldType) {
                 case "boolean":
                   return (

@@ -72,12 +72,12 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
     });
   }, [onChange, grids, layouts, title]);
 
-  const onLayoutChange = useCallback((layouts) => {
+  const onLayoutChange = useCallback((layouts: React.SetStateAction<ReactGridLayout.Layout[]>) => {
     setLayouts(layouts);
   }, []);
 
   const lockItem = useCallback(
-    (key) => () => {
+    (key: string) => () => {
       setLayouts(
         layouts.map((item) => {
           if (item.i === key) {
@@ -96,7 +96,7 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
   );
 
   const unlockItem = useCallback(
-    (key) => () => {
+    (key: string) => () => {
       setLayouts(
         layouts.map((item) => {
           if (item.i === key) {
@@ -115,14 +115,14 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
   );
 
   const removeItem = useCallback(
-    (key) => () => {
+    (key: string) => () => {
       setLayouts(layouts.filter((item) => item.i !== key));
     },
     [layouts]
   );
 
   const editItem = useCallback(
-    (key) => () => {
+    (key: string | number) => () => {
       setEditingGrid({
         ...grids[key],
         key,
@@ -184,17 +184,17 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
   }, [layouts, grids, removeItem, editItem, editingGrid]);
 
   const onDrop = useCallback(
-    (layouts: Layout[], layoutItem, _event) => {
+    (layouts: Layout[], _event:any) => {
       const newId = cuid();
       const type = _event.dataTransfer?.getData("text/plain");
       setLayouts(
         layouts.map((layout) => {
           if (layout.i === "__dropping-elem__") {
             layout.i = newId;
-            const layoutExtra = TOOLBAR_MAP[type].layoutExtra || {};
+            // const layoutExtra = TOOLBAR_MAP[type].layoutExtra || {};
             return {
               ...layout,
-              ...layoutExtra,
+              // ...layoutExtra,
             };
           }
           return layout;
@@ -221,7 +221,7 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
   }, [onExit]);
 
   const onSaveEditingGrid = useCallback(
-    (values) => {
+    (values:any) => {
       if (editingGrid) {
         setEditingGrid({
           ...editingGrid,
