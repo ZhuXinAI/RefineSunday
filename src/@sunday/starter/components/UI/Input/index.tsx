@@ -1,5 +1,5 @@
 import { Center, Input } from "@chakra-ui/react";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 import { BsInputCursor } from "react-icons/bs";
 import { COMMON_DEFINITION } from "../../../json-schema/definitions";
 import { useController } from "react-hook-form";

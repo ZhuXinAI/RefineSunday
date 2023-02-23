@@ -1,5 +1,5 @@
 import { Center, Text } from "@chakra-ui/react";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 import { BiText } from "react-icons/bi";
 
 type Props = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Center, Text } from "@chakra-ui/react";
 import { FaForumbee } from "react-icons/fa";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 
 type Props = {
   title: string;

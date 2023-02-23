@@ -1,7 +1,7 @@
 import { Grid } from "./Grid";
 import { FaBox } from "react-icons/fa";
 import { COMMON_DEFINITION } from "../../json-schema/definitions";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 export const GRID: IGridItem = {
   type: "grid",
   label: "Grid",

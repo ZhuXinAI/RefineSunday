@@ -7,7 +7,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 import * as React from "react";
 import { ChakraIcon } from "./icon";
 

@@ -1,4 +1,4 @@
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 import { BiTable } from "react-icons/bi";
 import { Table } from "./Table";
 

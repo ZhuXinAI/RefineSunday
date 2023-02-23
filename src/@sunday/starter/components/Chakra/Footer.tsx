@@ -7,7 +7,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { ChakraIcon } from "./icon";
 import { IBox } from "../../json-schema/type";

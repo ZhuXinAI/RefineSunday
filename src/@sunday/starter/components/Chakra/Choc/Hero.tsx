@@ -13,7 +13,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { ChakraIcon } from "../icon";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 import { COMMON_DEFINITION } from "../../../json-schema/definitions";
 import { IButton } from "../../../json-schema/type";
 import { EMPTY_BUTTON } from "../../../json-schema/const";

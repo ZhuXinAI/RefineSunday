@@ -191,10 +191,10 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
         layouts.map((layout) => {
           if (layout.i === "__dropping-elem__") {
             layout.i = newId;
-            const layoutExtra = TOOLBAR_MAP[type].layoutExtra || {};
+            // const layoutExtra = TOOLBAR_MAP[type].layoutExtra || {};
             return {
               ...layout,
-              ...layoutExtra,
+              // ...layoutExtra,
             };
           }
           return layout;
