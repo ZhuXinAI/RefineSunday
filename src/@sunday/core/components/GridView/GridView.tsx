@@ -152,9 +152,9 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
           right={0}
           top={0}
           bottom={0}
-          zIndex={9999}
           _hover={{
             opacity: 1,
+            zIndex:99
           }}
           justifyContent={"center"}
           alignItems="center"
@@ -184,7 +184,9 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
   }, [layouts, grids, removeItem, editItem, editingGrid]);
 
   const onDrop = useCallback(
-    (layouts: Layout[], _event:any) => {
+    (layouts: Layout[],
+      item: ReactGridLayout.Layout,
+       _event:any) => {
       const newId = cuid();
       const type = _event.dataTransfer?.getData("text/plain");
       setLayouts(
