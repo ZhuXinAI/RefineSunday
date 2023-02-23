@@ -9,6 +9,7 @@ export type SundayComponent = React.FC & {
       minH: number;
       w: number;
       h: number;
-    }
+    },
+    icon?: React.ReactNode
   };
 };

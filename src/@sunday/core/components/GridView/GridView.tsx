@@ -152,9 +152,9 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
           right={0}
           top={0}
           bottom={0}
+          zIndex={9999}
           _hover={{
             opacity: 1,
-            zIndex: 99,
           }}
           justifyContent={"center"}
           alignItems="center"
@@ -325,7 +325,7 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
                       // key={JSON.stringify([isEditMode])}
                       compactType={'vertical'}
                       onDropDragOver={(e) => {
-                        return { w: 6, h: 1 };
+                        return { w: 3, h: 1 };
                       }}
                       onDrop={onDrop}
                       layouts={{

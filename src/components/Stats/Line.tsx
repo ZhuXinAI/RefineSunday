@@ -1,10 +1,8 @@
 import React, { useMemo } from "react";
 import { Center, Input } from "@chakra-ui/react";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
 import { BsBarChartLine } from "react-icons/bs";
 import { ResponsiveLine } from "@nivo/line";
-import { COMMON_DEFINITION } from "../../json-schema/definitions";
-import { useMultipleCountData } from "../../hooks/useData";
+import { SundayComponent } from "@sunday/core/types/sunday";
 type Props = {
   endpoints: {
     url: string;
@@ -14,9 +12,8 @@ type Props = {
   yLabel: string;
 };
 
-const Component = ({ endpoints, xLabel = "标题", yLabel = "数量" }: Props) => {
-  const { data = [], isLoading } = useMultipleCountData(endpoints, "count");
-
+export const CustomLineChart = ({ xLabel = "Label", yLabel = "Label" }: Props) => {
+  const data: any[] = [];
   const enhancedData = useMemo(() => {
     return [
       {
@@ -102,13 +99,10 @@ const Component = ({ endpoints, xLabel = "标题", yLabel = "数量" }: Props) =
   );
 };
 
-export const NIVO_LINE: IGridItem = {
+(CustomLineChart as SundayComponent).config= {
   type: "nivo_line",
-  label: "线状图",
-  editType: "jsonschema",
+  label: "Line Charts",
   schema: {
-    // type: "object",
-    definitions: COMMON_DEFINITION,
     properties: {
       endpoints: {
         type: "array",
@@ -138,6 +132,6 @@ export const NIVO_LINE: IGridItem = {
       },
     },
   },
-  component: Component,
+  component: CustomLineChart,
   icon: <BsBarChartLine size={36} />,
 };

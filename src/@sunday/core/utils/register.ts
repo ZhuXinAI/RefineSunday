@@ -11,7 +11,7 @@ export const registerComponent = (components: any[]) => {
       type: component.type,
       label: component.name,
       ...config,
-      schema: {
+      schema: config?.schema?.type === 'object' ? config.schema : {
         type: "object",
         properties: config?.schema || {},
       },

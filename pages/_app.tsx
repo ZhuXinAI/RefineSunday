@@ -28,8 +28,13 @@ import { Create } from "@components/Create";
 import { useSundayLocalStateProvider } from "@sunday/core/hooks/useSundayProvider";
 import { Progress } from "@components/Stats/Progress";
 import { List } from "@components/List";
+import { CustomPie } from "@components/Stats/Pie";
+import { CustomLineChart } from "@components/Stats/Line";
+import "src/global.css";
+import { CTACentered } from "@components/Sites/CTACentered";
+import { ChakraChocHero } from "@components/Sites/Hero";
 
-registerComponent([Create, Progress, List]);
+registerComponent([Create, Progress, List, CustomPie, CustomLineChart, CTACentered, ChakraChocHero]);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const provider = useSundayLocalStateProvider();
