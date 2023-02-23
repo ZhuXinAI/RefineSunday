@@ -29,7 +29,6 @@ interface Props {
   resource?: string;
   withBreadcrumb?: boolean;
   wrapperProps?: any;
-  columns: ColumnDef<any>[];
   columns: Array<any>;
 }
 
