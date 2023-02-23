@@ -20,7 +20,7 @@ const Component = ({ button }: Props) => {
 
   return (
     <Center h="full">
-      <Button isFullWidth type={type} variant={variant}>
+      <Button type={type} variant={variant}>
         {text}
       </Button>
     </Center>
