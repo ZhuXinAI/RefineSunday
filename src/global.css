@@ -1,3 +1,7 @@
 .SundayGridView {
     overflow-y: auto;
 }
+
+.react-grid-item > .react-resizable-handle {
+    z-index: 1000;
+}
