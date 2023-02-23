@@ -63,7 +63,7 @@ export const Create: React.FC<Props> = ({
             ))}
           </Select>
         );
-    
+
       default:
         return <Input id={field?.id || field?.label} type="text" {...field} />;
     }
@@ -94,9 +94,9 @@ export const Create: React.FC<Props> = ({
       title: "Title",
       type: "string",
     },
-    withBreadcrumb:{
-        title: "With Breadcrumb",
-        type: "boolean",
+    withBreadcrumb: {
+      title: "With Breadcrumb",
+      type: "boolean",
     },
     fields: {
       title: "Fields",
@@ -123,4 +123,11 @@ export const Create: React.FC<Props> = ({
   },
   type: "create",
   label: "Create",
+  component: Create,
+  layoutExtra: {
+    minW: 12,
+    minH: 5,
+    w: 12,
+    h: 5,
+  },
 };
