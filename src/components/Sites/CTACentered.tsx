@@ -8,7 +8,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { SundayComponent } from "@sunday/core/types/sunday";
-import { EMPTY_BUTTON } from "@sunday/starter/json-schema/const";
+import { EMPTY_BUTTON } from "./common/const";
 import * as React from "react";
 import { COMMON_DEFINITION } from "./common/definitions";
 import { IButton } from "./common/type";
