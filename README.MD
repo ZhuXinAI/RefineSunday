@@ -1,4 +1,4 @@
-# refine Hackathon 2023 - README Guidelines
+# refine Hackathon 2023 - REFINE-SUNDAY
 
 ![cover-image](https://refine.ams3.cdn.digitaloceanspaces.com/blog/2023-01-06-hackaton-january/social.png)
 
@@ -16,7 +16,8 @@ Refine-Sunday
 
 ### Cover Image
 
-[image](https://user-images.githubusercontent.com/11485618/220957643-fda8645f-c1ab-49e2-91bf-1ead7a09c122.png)
+![image](https://user-images.githubusercontent.com/11485618/220959173-b317fb0f-23eb-4e03-91ad-f2c1a2da1043.png)
+
 
 ### Project Demo link
 
@@ -29,12 +30,21 @@ Decrease time-wasting arguments between developer and PM.
 
 ### Participants
 Tony(https://github.com/windht)
+
 Donald(https://github.com/Donaldzzq)
 
 
 ### Preview
+Home
+
 ![home](https://user-images.githubusercontent.com/11485618/220958210-6c0c5771-58de-47f6-bda6-58330000d316.png)
+
+Edit
+
 ![Edit](https://user-images.githubusercontent.com/11485618/220958242-a75095fe-de31-4e07-b0ed-2466d428866a.png)
+
+Edit Component
+
 ![EditComponent](https://user-images.githubusercontent.com/11485618/220958260-4c9fc451-7713-4d32-b8ca-8f49c93d4384.png)
 
 
