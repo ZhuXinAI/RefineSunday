@@ -34,6 +34,7 @@ interface Props {
   logoUrl: string;
   loginButtonLabel: string;
   loginButtonHref: string;
+  children: React.ReactNode;
 }
 
 const ChocHeader = ({

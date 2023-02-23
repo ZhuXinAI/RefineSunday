@@ -9,6 +9,7 @@ type Props = {
     redirectAfterSuccess: string;
   };
   isStatic?: boolean;
+  children: React.ReactNode;
 };
 
 export const FormWrapper: React.FC<Props> = ({ form, children, isStatic }) => {
