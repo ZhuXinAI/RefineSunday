@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
-import { Center, Input } from "@chakra-ui/react";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { Center } from "@chakra-ui/react";
 import { BsBarChartLine } from "react-icons/bs";
 import { ResponsiveLine } from "@nivo/line";
 import { COMMON_DEFINITION } from "../../json-schema/definitions";
 import { useMultipleCountData } from "../../hooks/useData";
+import { IGridItem } from "@sunday/core/components/GridView";
 type Props = {
   endpoints: {
     url: string;

@@ -1,5 +1,5 @@
 import { Center, Input } from "@chakra-ui/react";
-import { IGridItem } from "@sunday/frontend-shared/components/GridView/types";
+import { IGridItem } from "@sunday/core/components/GridView";
 import { BsPieChart } from "react-icons/bs";
 import { Pie } from "@nivo/pie";
 type Props = {

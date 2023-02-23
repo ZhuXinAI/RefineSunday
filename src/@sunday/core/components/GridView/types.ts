@@ -3,7 +3,7 @@ import { Layout } from "react-grid-layout";
 export interface IGridViewItem {
   props: any;
   type: string;
-  key?: string;
+  key?: string | number;
 }
 
 export interface IGridViewData {

@@ -19,6 +19,7 @@ export const DetailBar = ({
 }: {
   grid?: IGridViewItem;
   onSave: any;
+  onExit: () => void;
 }) => {
   const gridWithFields = useMemo(() => {
     return grid ? TOOLBAR_MAP[grid.type] : null;
