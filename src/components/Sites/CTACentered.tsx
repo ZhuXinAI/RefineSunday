@@ -56,7 +56,7 @@ export const CTACentered = ({
 
 (CTACentered as SundayComponent).config = {
     type: "chakra_cta_centered",
-    label: "CTA Centered",
+    label: "CTA Center",
     layoutExtra: {
       minW: 12,
       minH: 3,

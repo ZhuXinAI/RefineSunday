@@ -185,7 +185,7 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
 
   const onDrop = useCallback(
     (layouts: Layout[],
-      item: ReactGridLayout.Layout,
+      _item: ReactGridLayout.Layout,
        _event:any) => {
       const newId = cuid();
       const type = _event.dataTransfer?.getData("text/plain");
@@ -193,10 +193,10 @@ export const GridView = ({ data, onChange, onExit, components }: Props) => {
         layouts.map((layout) => {
           if (layout.i === "__dropping-elem__") {
             layout.i = newId;
-            // const layoutExtra = TOOLBAR_MAP[type].layoutExtra || {};
+            const layoutExtra = TOOLBAR_MAP[type]?.layoutExtra || {};
             return {
               ...layout,
-              // ...layoutExtra,
+              ...layoutExtra,
             };
           }
           return layout;
