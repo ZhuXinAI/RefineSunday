@@ -11,16 +11,25 @@ import {
   Td,
   Heading,
   Breadcrumb,
+  FileField,
+  BooleanField,
+  DateField,
+  EmailField,
+  MarkdownField,
+  NumberField,
+  TagField,
+  UrlField,
 } from "@pankod/refine-chakra-ui";
 import { useTable, ColumnDef, flexRender } from "@pankod/refine-react-table";
 import { SundayComponent } from "@sunday/core/types/sunday";
+import { IconCheck, IconX } from "@tabler/icons";
 
 interface Props {
   title: string | React.ReactNode;
   resource?: string;
   withBreadcrumb?: boolean;
   wrapperProps?: any;
-  columns: ColumnDef<any>[];
+  columns: Array<any>;
 }
 
 export const List: React.FC<Props> = ({
@@ -30,12 +39,60 @@ export const List: React.FC<Props> = ({
   wrapperProps,
   columns = [],
 }) => {
+  const filteredColumns = useMemo(() => {
+    return columns
+      .filter((column) => !!column.id)
+      ?.map((_column) => {
+        if (_column.fieldType === "text") {
+          return _column;
+        } else {
+          return {
+            ..._column,
+            cell: function render({ getValue }) {
+              switch (_column.fieldType) {
+                case "boolean":
+                  return (
+                    <BooleanField
+                      value={getValue() === _column.trueValue}
+                      trueIcon={<IconCheck />}
+                      falseIcon={<IconX />}
+                      valueLabelTrue={_column.trueValue}
+                      valueLabelFalse={_column.falseValue}
+                    />
+                  );
+                case "date":
+                  return <DateField format="LLL" value={getValue()} />;
+                case "email":
+                  return <EmailField value={getValue()} />;
+                case "file":
+                  return <FileField src={getValue()[0].url} target="_blank" />;
+                case "markdown":
+                  return <MarkdownField value={getValue()} />;
+                case "number":
+                  return (
+                    <NumberField
+                      value={getValue()}
+                      options={{
+                        notation: "compact",
+                      }}
+                    />
+                  );
+                case "tag":
+                  return <TagField value={getValue()} />;
+                case "url":
+                  return <UrlField value={getValue()[0].url} />;
+              }
+            },
+          };
+        }
+      });
+  }, [columns]);
   const {
     getHeaderGroups,
     getRowModel,
     refineCore: { setCurrent, pageCount, current },
   } = useTable({
-    columns,
+    columns: filteredColumns,
   });
   const renderTitle = useMemo(() => {
     if (typeof title === "string") {
@@ -99,7 +156,7 @@ export const List: React.FC<Props> = ({
       type: "string",
       title: "Title",
     },
-    resource:{
+    resource: {
       type: "string",
       title: "Resource",
     },
@@ -115,13 +172,39 @@ export const List: React.FC<Props> = ({
         properties: {
           id: {
             type: "string",
-            default: "id",
+            title: "ID",
           },
           header: {
             type: "string",
+            title: "Header",
           },
           accessorKey: {
             type: "string",
+            title: "Accessor Key",
+          },
+          fieldType: {
+            type: "string",
+            title: "Field Type",
+            default: "text",
+            enum: [
+              "boolean",
+              "date",
+              "email",
+              "file",
+              "markdown",
+              "number",
+              "tag",
+              "text",
+              "url",
+            ],
+          },
+          trueValue: {
+            type: "string",
+            title: "True Value (only applicable for boolean field)",
+          },
+          falseValue: {
+            type: "string",
+            title: "False Value (only applicable for boolean field)",
           },
         },
       },
