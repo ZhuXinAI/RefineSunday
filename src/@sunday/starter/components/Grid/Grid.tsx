@@ -27,7 +27,7 @@ export const Grid = ({
   isForm = false,
   form = {
     endpoint: "",
-    redirectAfterSuccess: ""
+    redirectAfterSuccess: "",
   },
   isStatic = false,
 }: Props) => {
@@ -47,7 +47,11 @@ export const Grid = ({
   }, [layouts]);
 
   const onDrop = useCallback(
-    (layouts: Layout[], layoutItem, _event) => {
+    (
+      layouts: ReactGridLayout.Layout[],
+      item: ReactGridLayout.Layout,
+      _event: any
+    ) => {
       const newId = cuid();
       const newLayouts = layouts.map((layout) => {
         if (layout.i === "__dropping-elem__") {
@@ -75,7 +79,7 @@ export const Grid = ({
   );
 
   const removeItem = useCallback(
-    (key) => () => {
+    (key: string) => () => {
       const newLayouts = layouts.filter((item) => item.i !== key);
       setLayouts(newLayouts);
       setGrids({
@@ -93,7 +97,7 @@ export const Grid = ({
   );
 
   const editItem = useCallback(
-    (key) => () => {
+    (key: string | number) => () => {
       setEditingGrid({
         ...grids[key],
         key,
@@ -103,7 +107,7 @@ export const Grid = ({
   );
 
   const onLayoutChange = useCallback(
-    (layouts) => {
+    (layouts: React.SetStateAction<ReactGridLayout.Layout[]>) => {
       setLayouts(layouts);
       setGrids({
         ...grids,
@@ -149,6 +153,7 @@ export const Grid = ({
       h="full"
       overflow={"hidden"}
     >
+      {/* @ts-ignore */}
       <AutoSizer>
         {({ width, height }) => (
           <ReactGridLayout
@@ -183,5 +188,11 @@ export const Grid = ({
     </Box>
   );
 
-  return isForm ? <FormWrapper isStatic={isStatic} form={form}>{content}</FormWrapper> : content;
+  return isForm ? (
+    <FormWrapper isStatic={isStatic} form={form}>
+      {content}
+    </FormWrapper>
+  ) : (
+    content
+  );
 };
